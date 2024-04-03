@@ -16,7 +16,7 @@ pdffiles = glob.glob(os.path.join(scanspath, "*.pdf"))
 reader = easyocr.Reader(["de", "en"])
 
 for pdfpathname in pdffiles:
-    pdfname = pdfpathname.split("\\")[-1]
+    _, pdfname = os.path.split(pdfpathname)
 
     doc = fitz.open(os.path.join(scanspath, pdfname))
     page = doc.load_page(0)
@@ -50,7 +50,7 @@ for pdfpathname in pdffiles:
 for i, info in enumerate(doc.pages()):
     print(info)
     page = doc.load_page(i)
-    
+
     for _, text, _ in result:
         print(text)
 """
